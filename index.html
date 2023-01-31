@@ -1,0 +1,28 @@
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<script src = "https://cdn.jsdelivr.net/gh/jeromeetienne/virtualjoystick.js/virtualjoystick.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+body {overflow	: hidden;background-color: #BBB;}
+#container {width: 100%;height: 100%;overflow: hidden;padding:0;margin:0;}
+</style><title> Coptercam &#8211; Filmagens Aéreas &#8211; Filmagens Drones, Camera Car e Movimentos </title></head><body>
+<img src="https://www.coptercam.com.br/wp-content/uploads/2017/04/logo-topo-min.png" alt="Coptercam - Filmagens Aéreas">
+<div id="container"><h1></h1></div><div id="info"><span id="result"></span></div> <script>
+console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
+var joystick	= new VirtualJoystick({
+container	: document.getElementById('container'),
+mouseSupport	: true,
+limitStickTravel : true,
+stickRadius : 100
+});
+			
+joystick.addEventListener('touchStart', function(){
+console.log('down')
+})
+joystick.addEventListener('touchEnd', function(){
+console.log('up')
+})
+$.ajaxSetup({timeout:50});
+setInterval(function(){
+var message = "/?M/?X"+Math.round(joystick.deltaX())+"/X/?Y"+Math.round(joystick.deltaY())+"/Y/M";$.get(message);var outputEl	= document.getElementById('result');}, 50);
+</script></body></html>
